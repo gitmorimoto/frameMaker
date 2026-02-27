@@ -115,4 +115,69 @@ class InnerWithInputBox1 extends Inner
     }
 
 }
+
+class ListMaker
+{
+    protected $inNumber;
+    protected $contWidth;
+    protected $contHeight;
+    protected $contLeft;
+    protected $contTop;
+    protected $fontSize;
+    protected $listData;
+    function __construct($inNumber,$contWidth,$contHeight,$contLeft,$contTop,$fontSize)
+	{
+        $this->inNumber = $inNumber;
+        $this->contWidth = $contWidth;
+        $this->contHeight = $contHeight;
+        $this->contLeft = $contLeft;
+        $this->contTop = $contTop;
+        $this->fontSize = $fontSize;
+       
+
+	}
+    public function content($listData)
+    {
+        $inNumber = $this->inNumber;
+        $contWidth = $this->contWidth;
+        $contHeight = $this->contHeight;
+        $contLeft = $this->contLeft;
+        $contTop = $this->contTop;
+        $fontSize = $this->fontSize;
+        $this->listData = $listData;
+        
+        $cont = "<div id='content{$inNumber}' class = '' style='
+            width:{$contWidth};
+            height:{$contHeight};
+            position:absolute;
+            left:{$contLeft};
+            top:{$contTop};
+            color:white;display:flex' >
+             {$this->listData}   
+            </div>";
+        return $cont;
+    }
+    
+}
+
+class MakeListData
+{
+    protected $listData;
+    public function list_maker($listArray)
+    {
+        for($i=0;$i<count($listArray);$i++)
+        {
+            $this->listData[$i] = "<div id='li{$i}' class='li' style='width:98%;height:25px;border-bottom:1px solid white;display:flex'>
+                    <div id='' class='' style='width:10%;height:25px;border-right:1px solid white'>
+                    {$i}
+                    </div>
+                    <div id='' class='' style='width:90%;height:25px'>
+                    {$listArray[$i]}
+                    </div>
+                  </div>";
+        }
+        //print_r($this->listData);
+        return $this->listData;
+    }
+}
 ?>

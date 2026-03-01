@@ -17,9 +17,10 @@ class Frame
         $this->left = $left;
         $this->top = $top;
         $this->inner = $innerObj;
-        
+        //print_r($this->inner);
         if(gettype($this->inner)=='array')
         {
+            echo 'array';
             $n=count($this->inner);
             echo '<div id="frame'.$fN.'" class = "frame" 
             style="width:'.$this->width.';height:'.$this->height.';position:absolute;top:'.$this->top.';
@@ -32,12 +33,19 @@ class Frame
             // echo $this->inner->inpBox();
             echo '</div>';
             
-        }else
+        }else if(gettype($this->inner)=='object')
         {
+            echo 'obj';
             echo "<div id='frame{$fN}' class = 'frame' 
             style='width:{$this->width};height:{$this->height};position:absolute;top:{$this->top};
             left:{$this->left};border:1px solid {$this->borderColor}'>
             {$this->inner->content()}
+            </div>";
+        }else{
+            echo "<div id='frame{$fN}' class = 'frame' 
+            style='width:{$this->width};height:{$this->height};position:absolute;top:{$this->top};
+            left:{$this->left};border:1px solid {$this->borderColor}'>
+            
             </div>";
         }
         

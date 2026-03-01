@@ -1,137 +1,140 @@
 <?php
-class Inner
+class InnerWithOneInput
 {
     protected $inNumber;
-    protected $content;
+    protected $itemName;
     protected $contWidth;
     protected $contHeight;
     protected $contLeft;
     protected $contTop;
     protected $fontSize;
-    function __construct($inNumber,$content,$contWidth,$contHeight,$contLeft,$contTop,$fontSize)
+    
+    function __construct($inNumber,$itemName,$contWidth,$contHeight,$fontSize)
 	{
         $this->inNumber = $inNumber;
-		$this->content = $content;
+		$this->itemName = $itemName;
         $this->contWidth = $contWidth;
         $this->contHeight = $contHeight;
-        $this->contLeft = $contLeft;
-        $this->contTop = $contTop;
-        $this->fontSize = $fontSize;
+        
 
 	}
 
     public function content()
     {
         $inNumber = $this->inNumber;
-        $content = $this->content;
+        $itemName = $this->itemName;
         $contWidth = $this->contWidth;
         $contHeight = $this->contHeight;
-        $contLeft = $this->contLeft;
-        $contTop = $this->contTop;
         $fontSize = $this->fontSize;
         
         $cont = "<div id='content{$inNumber}' class = '' style='
-            width:{$contWidth};
-            height:{$contHeight};
-            position:absolute;
-            left:{$contLeft};
-            top:{$contTop};
-            color:white;' >
-            {$content}
-            </div>";
+                width:{$contWidth};
+                height:{$contHeight};
+                color:white;
+                display:flex' >
+                <div id='' style='width:fit_content;height:98%'>
+                    {$itemName}
+                </div>
+                <div id='' style='width:70%;height:98%'>
+                    <input id='td{$itemName}' class='td' style='width:98%;height:98%'>
+                </div>
+                </div>";
+
         return $cont;
     }
 }
 
 
-class InnerWithInputBox0 extends Inner
+class InnerWithOneInputV extends InnerWithOneInput
 {
     public function content()
     {
         $inNumber = $this->inNumber;
-        $content = $this->content;
+        $itemName = $this->itemName;
         $contWidth = $this->contWidth;
         $contHeight = $this->contHeight;
-        $contLeft = $this->contLeft;
-        $contTop = $this->contTop;
         $fontSize = $this->fontSize;
         
+        
         $cont = "<div id='content{$inNumber}' class = '' style='
-            width:{$contWidth};
-            height:{$contHeight};
-            position:absolute;
-            left:{$contLeft};
-            top:{$contTop};
-            color:white;font-size:{$fontSize}' >
-            {$content}
-            <input id='td{$inNumber}'
-            class='td' style='
-            width:70%;
-            height:80%;
-            background:darkgreen;
-            color:white'>
-            </div>";
+                width:{$contWidth};
+                height:{$contHeight};
+                color:white;
+                display:' >
+                    <div id='' class = '' style='
+                    width:98%;
+                    height:15mm;
+                    color:white;font-size:{$fontSize}' >
+                        {$itemName}
+                    </div>
+                    <div id='disp{$inNumber}'
+                    class='disp' style='
+                    width:70%;
+                    height:80%;
+                    '>
+                        <input id='td{$inNumber}' class='td' style='width:98%;height:98%'>
+                    </div>
+                    
+                
+                </div>";
         return $cont;
     }
 
 }
 
-class InnerWithInputBox1 extends Inner
+class InnerWithInputBox1 extends InnerWithOneInput
 {
+    
     public function content()
     {
         $inNumber = $this->inNumber;
-        $content = $this->content;
+        $itemName = $this->itemName;
         $contWidth = $this->contWidth;
         $contHeight = $this->contHeight;
-        $contLeft = $this->contLeft;
-        $contTop = $this->contTop;
         $fontSize = $this->fontSize;
+        
+       
+        //echo $inpElem;
         
         $cont = "<div id='content{$inNumber}' class = '' style='
             width:{$contWidth};
             height:{$contHeight};
-            position:absolute;
-            left:{$contLeft};
-            top:{$contTop};
-            color:white;display:flex' >
+            display:flex
+            color:white;display:flex; border:;' >
                 <div id='subTitle{$inNumber}' class='subTitle' style=
                 'width:30%;
                 height:98%;
-                border-right:1px solid white;
-                padding:5px;
-                box-sizing: border-box;
                 font-size:{$fontSize}'>
-                {$content}
+                {$itemName}
                 </div>
-                <input id='td{$inNumber}'
-                class='td' style='
-                width:68%;
-                height:95%;
-                background:darkgreen;
-                color:white'>
+                <div id = 'disp{$inNumber}'
+                 class='disp'
+                 style='
+                 width:68%;
+                 height:95%;
+                 background:transparent;
+                 color:white'>
+                
+                </div>
             </div>";
         return $cont;
     }
 
 }
 
-class ListMaker
+class InnerWithListTowInput
 {
     protected $inNumber;
     protected $contWidth;
     protected $contHeight;
-    protected $contLeft;
-    protected $contTop;
+    
     protected $fontSize;
     protected $listData;
-    function __construct($inNumber,$contWidth,$contHeight,$contLeft,$contTop,$fontSize)
+    function __construct($inNumber,$contWidth,$contHeight,$fontSize)
 	{
         $this->inNumber = $inNumber;
         $this->contWidth = $contWidth;
         $this->contHeight = $contHeight;
-        $this->contLeft = $contLeft;
-        $this->contTop = $contTop;
         $this->fontSize = $fontSize;
        
 
@@ -141,19 +144,21 @@ class ListMaker
         $inNumber = $this->inNumber;
         $contWidth = $this->contWidth;
         $contHeight = $this->contHeight;
-        $contLeft = $this->contLeft;
-        $contTop = $this->contTop;
         $fontSize = $this->fontSize;
         $this->listData = $listData;
+        $list="";
+        $n = count($this->listData);
+        for($i=0;$i<$n;$i++)
+        {
+            $this->list = $this->list.$this->listData[$i];
+        }
         
         $cont = "<div id='content{$inNumber}' class = '' style='
             width:{$contWidth};
             height:{$contHeight};
             position:absolute;
-            left:{$contLeft};
-            top:{$contTop};
-            color:white;display:flex' >
-             {$this->listData}   
+            color:white;display:' >
+              {$this->list} 
             </div>";
         return $cont;
     }
@@ -167,17 +172,68 @@ class MakeListData
     {
         for($i=0;$i<count($listArray);$i++)
         {
-            $this->listData[$i] = "<div id='li{$i}' class='li' style='width:98%;height:25px;border-bottom:1px solid white;display:flex'>
-                    <div id='' class='' style='width:10%;height:25px;border-right:1px solid white'>
-                    {$i}
+            if($i==0)
+            {
+                 $this->listData[$i] = "<div id='li{$i}' class='li' style='width:98%;height:25px;display:flex'>
+                    <div id='' class='' style='width:0%;height:25px;'>
                     </div>
-                    <div id='' class='' style='width:90%;height:25px'>
+                    <div id='' class='' style='width:98%;height:25px'>
                     {$listArray[$i]}
                     </div>
                   </div>";
+            }else
+            {
+                $this->listData[$i] = "<div id='li{$i}' class='li' style='width:98%;height:25px;display:flex'>
+                        <div id='' class='' style='width:3%;height:20px;border:1px solid white;border-radius:20px; text-align: center;'>
+                        {$i}
+                        </div>
+                        <div id='' class='' style='width:90%;height:25px'>
+                        {$listArray[$i]}
+                        </div>
+                    </div>";
+            }
         }
         //print_r($this->listData);
         return $this->listData;
     }
+}
+
+class InnerWithInputBox2 extends InnerWithInputBox1
+{
+    public function content()
+    {
+        $inNumber = $this->inNumber;
+        $content = $this->content;
+        $contWidth = $this->contWidth;
+        $contHeight = $this->contHeight;
+        $contLeft = $this->contLeft;
+        $contTop = $this->contTop;
+        $fontSize = $this->fontSize;
+        $inpElem = $this->inpElem;
+        
+        $cont = "<div id='content{$inNumber}' class = '' style='
+                width:{$contWidth};
+                height:{$contHeight};
+                
+                color:white;' >
+                    <div id='subTitle{$inNumber}' class='subTitle' style=
+                    'width:98%;
+                    height:20%;
+                    padding:5px;
+                    box-sizing: border-box;
+                    font-size:{$fontSize}'>
+                    {$content}
+                    </div>
+                    <div id='wtap{$inNumber}'
+                    class='td' style='
+                    width:98%;
+                    height:98%;
+                    '>
+                    {$inpElem}
+                    </div>
+            </div>";
+        return $cont;
+    }
+
 }
 ?>

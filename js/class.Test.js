@@ -9,9 +9,13 @@ export class Test{
         for(let i=0;i<this.testData.length;i++){
             console.log(this.testData[i]);
             console.log('i'+i);
-            this.tdObj[i]= document.getElementById(this.testData[i]);
-            console.log(this.tdObj[i]);
-            this.tdObj[i].value = this.testData[i];
+            const elem = document.getElementById('td'+i);
+            console.log(elem);
+            if(elem){
+                elem.value = this.testData[i];
+                this.tdObj[i] = elem;
+            }
+           
         }
     }
 }   

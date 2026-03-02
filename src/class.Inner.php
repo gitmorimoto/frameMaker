@@ -130,6 +130,8 @@ class InnerWithListTowInput
     
     protected $fontSize;
     protected $listData;
+    protected $list;
+   
     function __construct($inNumber,$contWidth,$contHeight,$fontSize)
 	{
         $this->inNumber = $inNumber;
@@ -139,32 +141,54 @@ class InnerWithListTowInput
        
 
 	}
-    public function content($listData)
+    protected function listArrayMaker($inNumber)
+    {
+     $listArray = ["主たる精神障害（ICD-10に準じ該当する番号に〇を付ける又は記載すること",
+                          "①症状性を含む器質性精神障害（F0）",
+                          "➁精神作用物質による精神及び行動の障害（F1）",
+                          "③統合失調症、統合失調型障害及び妄想性障害（F72）",
+                          "④気分障害(F73)",
+                          "⑤てんかん（G40）",
+                          "⑥その他<input id='td".$inNumber." class='td'  style='width:30%;height:10mm;background:darkgreen;color:white'>".
+                          "(F <input id='td".($inNumber+1). " class='td' style='width:10%;height:10mm;background:darkgreen;color:white'> )"
+                           ] ;
+    $this->listData = $listArray;
+   // print_r($this->listData);
+   // echo count($this->listData);
+    }
+    
+    public function content()
     {
         $inNumber = $this->inNumber;
         $contWidth = $this->contWidth;
         $contHeight = $this->contHeight;
         $fontSize = $this->fontSize;
-        $this->listData = $listData;
-        $list="";
-        $n = count($this->listData);
-        for($i=0;$i<$n;$i++)
+        
+        
+        
+        $this->listArrayMaker($inNumber);
+        $listData = $this->listData;
+        //echo '$listData=';
+        //print_r($listData);
+        for($i=0;$i<count($listData);$i++)
         {
-            $this->list = $this->list.$this->listData[$i];
+            $this->list = $this->list."<div id='li".$i."' class='li' style='width:150mm;height:7mm'>".
+            $listData[$i]."</div>";
         }
         
-        $cont = "<div id='content{$inNumber}' class = '' style='
-            width:{$contWidth};
-            height:{$contHeight};
+        $cont = "<div id='content".$inNumber."'
+            style='
+            width:".$contWidth.";
+            height:".$contHeight.";
             position:absolute;
-            color:white;display:' >
-              {$this->list} 
-            </div>";
+            color:white;' >".
+              $this->list. 
+            "</div>";
         return $cont;
     }
     
 }
-
+/*
 class MakeListData
 {
     protected $listData;
@@ -197,7 +221,8 @@ class MakeListData
         return $this->listData;
     }
 }
-
+*/
+/*
 class InnerWithInputBox2 extends InnerWithInputBox1
 {
     public function content()
@@ -236,4 +261,5 @@ class InnerWithInputBox2 extends InnerWithInputBox1
     }
 
 }
+    */
 ?>

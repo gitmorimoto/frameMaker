@@ -45,7 +45,7 @@ class Frame
             echo "<div id='frame{$fN}' class = 'frame' 
             style='width:{$this->width};height:{$this->height};position:absolute;top:{$this->top};
             left:{$this->left};border:1px solid {$this->borderColor}'>
-            
+            {$this->inner}
             </div>";
         }
         

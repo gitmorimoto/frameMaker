@@ -4,13 +4,15 @@ import {Confirm} from "./class.confirm.js";
 
 window.addEventListener('DOMContentLoaded', () => {
     //////////test data/////////////////////////////////////////////
+    
     const testArray = ["td0","td1","td2","td3","td4","td5","td6"];
     const test = new Test(testArray);
     test.getTestData();
+    
     /////////////////////////////////////////////////////////////////
     /////get input data//////////////////////////////////////////////
     const getData = new GetData(6);
-    const inpElment = new InpElem();
+   
     const submitBtn = document.getElementById("submitBtn"); 
     submitBtn.addEventListener("click", () => {
         const data = getData.getData();

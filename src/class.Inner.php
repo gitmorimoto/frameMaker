@@ -8,6 +8,8 @@ class InnerWithOneInput
     protected $contLeft;
     protected $contTop;
     protected $fontSize;
+    public $inpBox;
+    
     
     function __construct($inNumber,$itemName,$contWidth,$contHeight,$fontSize)
 	{
@@ -15,10 +17,17 @@ class InnerWithOneInput
 		$this->itemName = $itemName;
         $this->contWidth = $contWidth;
         $this->contHeight = $contHeight;
-        
+        $this->fontSize = $fontSize;
 
 	}
-
+   public function inp()
+    {
+        $this->inpBox = "<div id='disp{$this->inNumber}' class='disp' style='width:70%;height:98%'>
+                    <input id='td{$this->inNumber}' class='td' style='width:98%;height:98%'>
+                </div> ";
+        return $this->inpBox;
+    }
+    
     public function content()
     {
         $inNumber = $this->inNumber;
@@ -26,19 +35,17 @@ class InnerWithOneInput
         $contWidth = $this->contWidth;
         $contHeight = $this->contHeight;
         $fontSize = $this->fontSize;
-        
+       
         $cont = "<div id='content{$inNumber}' class = '' style='
                 width:{$contWidth};
                 height:{$contHeight};
                 color:white;
                 display:flex' >
-                <div id='' style='width:fit_content;height:98%'>
+                <div id='' style='width:fit-content;height:98%'>
                     {$itemName}
-                </div>
-                <div id='' style='width:70%;height:98%'>
-                    <input id='td{$itemName}' class='td' style='width:98%;height:98%'>
-                </div>
-                </div>";
+                </div>".
+                    $this->inp().
+                "</div>";
 
         return $cont;
     }
@@ -47,6 +54,14 @@ class InnerWithOneInput
 
 class InnerWithOneInputV extends InnerWithOneInput
 {
+    public function inp()
+    {
+        $this->inpBox = "<div id='disp{$this->inNumber}' class='disp' style='width:70%;height:98%'>
+                    <input id='td{$this->inNumber}' class='td' style='width:98%;height:98%'>
+                </div> ";
+        return $this->inpBox;
+    }
+
     public function content()
     {
         $inNumber = $this->inNumber;
@@ -54,8 +69,7 @@ class InnerWithOneInputV extends InnerWithOneInput
         $contWidth = $this->contWidth;
         $contHeight = $this->contHeight;
         $fontSize = $this->fontSize;
-        
-        
+
         $cont = "<div id='content{$inNumber}' class = '' style='
                 width:{$contWidth};
                 height:{$contHeight};
@@ -66,17 +80,11 @@ class InnerWithOneInputV extends InnerWithOneInput
                     height:15mm;
                     color:white;font-size:{$fontSize}' >
                         {$itemName}
-                    </div>
-                    <div id='disp{$inNumber}'
-                    class='disp' style='
-                    width:70%;
-                    height:80%;
-                    '>
-                        <input id='td{$inNumber}' class='td' style='width:98%;height:98%'>
-                    </div>
+                    </div>".
+                    $this->inp().
                     
                 
-                </div>";
+                "</div>";
         return $cont;
     }
 
@@ -130,7 +138,7 @@ class InnerWithListTowInput
     
     protected $fontSize;
     protected $listData;
-    protected $list;
+    public $list;
    
     function __construct($inNumber,$contWidth,$contHeight,$fontSize)
 	{
@@ -149,12 +157,15 @@ class InnerWithListTowInput
                           "③統合失調症、統合失調型障害及び妄想性障害（F72）",
                           "④気分障害(F73)",
                           "⑤てんかん（G40）",
-                          "⑥その他<input id='td".$inNumber." class='td'  style='width:30%;height:10mm;background:darkgreen;color:white'>".
-                          "(F <input id='td".($inNumber+1). " class='td' style='width:10%;height:10mm;background:darkgreen;color:white'> )"
+                          "<div style='width:150mm;display:flex'>⑥その他<div id='disp"
+                          .$inNumber."' style='width:40mm'><input id='td".$inNumber.
+                          "' class='td'  style='width:40mm;height:10mm;background:darkgreen;color:white'></div>".
+                          "(F<div id='disp".($inNumber+1)."'> <input id='td".($inNumber+1).
+                           "' class='td' style='width:15mm;height:10mm;background:darkgreen;
+                           color:white'></div>)</div> "
                            ] ;
     $this->listData = $listArray;
-   // print_r($this->listData);
-   // echo count($this->listData);
+   
     }
     
     public function content()
@@ -168,8 +179,7 @@ class InnerWithListTowInput
         
         $this->listArrayMaker($inNumber);
         $listData = $this->listData;
-        //echo '$listData=';
-        //print_r($listData);
+        
         for($i=0;$i<count($listData);$i++)
         {
             $this->list = $this->list."<div id='li".$i."' class='li' style='width:150mm;height:7mm'>".
@@ -186,6 +196,7 @@ class InnerWithListTowInput
             "</div>";
         return $cont;
     }
+   
     
 }
 /*

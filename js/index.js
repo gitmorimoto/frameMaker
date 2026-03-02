@@ -23,12 +23,16 @@ window.addEventListener('DOMContentLoaded', () => {
     const confirmBtn = document.getElementById("confirmBtn");
     const tdObj = [];
     const dispObj = []; 
-    for(let i=0;i<7;i++){
-        tdObj[i] = document.getElementById("td"+i);
-        dispObj[i] = document.getElementById("disp"+i);
-    }
+    
     confirmBtn.addEventListener("click", () => {
-        const confirm = new Confirm(tdObj,dispObj);
-        confirm.confirmData();
+        for(let i=0;i<7;i++){
+            tdObj[i] = document.getElementById("td"+i);
+            console.log('tdObj['+i+']='+tdObj[i]);
+            dispObj[i] = document.getElementById("disp"+i);
+            console.log('dispObj['+i+']='+dispObj[i]);
+            dispObj[i].textContent = tdObj[i].value;
+        }
+        //const confirm = new Confirm(tdObj,dispObj);
+        //confirm.confirmData();
     });
 })

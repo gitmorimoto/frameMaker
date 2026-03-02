@@ -6,21 +6,21 @@ class Frame
     protected $borderColor;
     protected $left;
     protected $top;
-    protected $inner;
+    public $inner;
     
     
-    public function frame($fN,$w,$h,$borderColor,$left,$top,$innerObj)
+    public function frame($fN,$w,$h,$borderColor,$left,$top,$inner)
     {
         $this->width = $w;
         $this->height = $h;
         $this->borderColor = $borderColor;
         $this->left = $left;
         $this->top = $top;
-        $this->inner = $innerObj;
+        $this->inner = $inner;
         //print_r($this->inner);
         if(gettype($this->inner)=='array')
         {
-            echo 'array';
+            //echo 'array';
             $n=count($this->inner);
             echo '<div id="frame'.$fN.'" class = "frame" 
             style="width:'.$this->width.';height:'.$this->height.';position:absolute;top:'.$this->top.';
@@ -38,15 +38,16 @@ class Frame
             echo 'obj';
             echo "<div id='frame{$fN}' class = 'frame' 
             style='width:{$this->width};height:{$this->height};position:absolute;top:{$this->top};
-            left:{$this->left};border:1px solid {$this->borderColor}'>
-            {$this->inner->content()}
-            </div>";
+            left:{$this->left};border:1px solid {$this->borderColor}'>".
+            $this->inner->content().
+            "</div>";
         }else{
+            echo 'str';
             echo "<div id='frame{$fN}' class = 'frame' 
             style='width:{$this->width};height:{$this->height};position:absolute;top:{$this->top};
-            left:{$this->left};border:1px solid {$this->borderColor}'>
-            {$this->inner}
-            </div>";
+            left:{$this->left};border:1px solid {$this->borderColor}'>".
+            $this->inner.
+            "</div>";
         }
         
     }
